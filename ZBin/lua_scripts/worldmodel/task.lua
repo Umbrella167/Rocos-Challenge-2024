@@ -16,10 +16,22 @@ function playerDirToPointDirSub(role, p) -- 返回 某座标点  球  playe 的�
 	local playerDir = player.dir(role) * 57.3 + 180
 	local playerPointDit = (p1 - player.pos(role)):dir() * 57.3 + 180
 	local sub = math.abs(playerDir - playerPointDit)
-	debugEngine:gui_debug_msg(CGeoPoint:new_local(0, -4000),  "AngleError: ".. sub)
+	debugEngine:gui_debug_msg(CGeoPoint:new_local(0, -3000),  "AngleError: ".. sub)
 	return sub
 end
 
+function enemyDirToPointDirSub(role, p)
+	if type(p) == 'function' then
+		p1 = p()
+	else
+		p1 = p
+	end
+	local playerDir = enemy.dir(role) * 57.3 + 180
+	local playerPointDit = (p1 - enemy.pos(role)):dir() * 57.3 + 180
+	local sub = math.abs(playerDir - playerPointDit)
+	debugEngine:gui_debug_msg(CGeoPoint:new_local(0, -3000),  "AngleError: ".. sub)
+	return sub
+end
 function canPass(startPos,endPos,buffer)
 	----------------------------------
 	---返回两点之间是否可以传球
