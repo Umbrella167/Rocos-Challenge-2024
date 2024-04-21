@@ -23,14 +23,13 @@ local getTheirDribblingPlayer = function()
     return minPlayer
 end
 local interPos = function(enemyNum)
-    return function()
         local num 
         if type(enemyNum) == "function" then
             num = enemyNum()
         else
             num = enemyNum
         end
-        local p = enemy.pos(num) + Utils.Polar2Vector(900,(ball.pos()-enemy.pos(num)):dir())
+        local p = enemy.pos(num) + Utils.Polar2Vector(1200,(ball.pos()-enemy.pos(num)):dir())
 
         for i,v in pairs(firstPos) do
             if player.toPointDist("Assister",v) < 700 then
@@ -43,7 +42,6 @@ local interPos = function(enemyNum)
             p = player.pos("Assister")
         end
         return p
-    end
 end
 gPlayTable.CreatePlay{
 firstState = "Init",
@@ -61,7 +59,7 @@ firstState = "Init",
     switch = function()
 
     end,
-    Assister = task.goCmuRush(interPos(function() return getTheirDribblingPlayer() end), toBallDir("Assister")),
+    Assister = task.goCmuRush(function()return interPos(function() return getTheirDribblingPlayer() end)end, toBallDir("Assister"),_,_,Utils.Polar2Vector(700,(interPos(function() return getTheirDribblingPlayer() end) - player.pos("Assister")):dir())),
     match = "[A]"
 },
 
