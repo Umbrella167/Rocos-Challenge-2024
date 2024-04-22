@@ -69,6 +69,7 @@ function toPlayerHeadDist(role)
     return (ball.pos() - tmpPlayerHead):mod()
 end
 
+
 function toPlayerDist(role)
     return (player.pos(role)- pos()):mod()
 end

@@ -9,25 +9,42 @@
 * 常用数据类型的方法
   * mod() :取两个坐标之间的模长，用法 local distance = (point1 - point2):mod()
   * dir() :取两个坐标的方向，用法 local direction = (point1 - point2):dir()
-  * projection(point):获取一个线段或者直线相对某一坐标的投影点,类型是CGeoPoint,构造方法 local prjPoint = 
+  * projection(point):获取一个(线段或者直线)相对某一坐标的投影点,返回的类型是CGeoPoint,构造方法 local prjPoint = segment:projection(point)
+  * [eg](prjpoint.png)
+  * IsPointOnLineOnSegment(point) : 判断某坐标点是否在线段上 用法: segment:IsPointOnLineOnSegment(point) 返回 true\false
 
 
 
 * 常用文件：
-  * player
-    * pos(role) : 获取坐标
-    * posX(role)
-    * posY(role)
-    * dir(role)
-    * vel(role)
-    * velDir(role)
-    * velMod(role)
-    * rawVel(role)
-    * rawVelMod(role)
-    * rotVel(role)
-    * valid(role)
-    * pos(role)
-    * posX(role)
+  * player.lua \ enemy.lua 这两个文件大同小异 (role 一般填写机器人车号或者匹配的名字)     * 
+    * num(role) : 获取我方机器人车号
+    * name(role): 获取我方机器人名字
+    * pos(role) : 获取我方机器人坐标  
+    * posX(role) : 获取我方机器人X坐标
+    * posY(role): 获取我方机器人Y坐标
+    * dir(role): 获取我方机器人朝向
+    * vel(role): 获取我方机器人速度
+    * velDir(role): 获取我方机器人速度的方向
+    * velMod(role): 获取我方机器人速度的大小
+    * rawVel(role): 获取我方机器人真实速度
+    * rawVelMod(role): 获取我方机器人真实速度大小
+    * rotVel(role): 获取我方机器人旋转速度
+    * valid(role): 获取我方机器人是否存在
+    * infraredOn(role) :检测我方机器人红外是否触发
+    * infraredCount(role) :检测我方机器人红外触发的帧数
+    * kickBall(role) :判断我方机器人是否踢球
   * ball
-  * enemy
-  * task
+    * pos() : 获取球的坐标
+    * posX() : 获取球的X坐标
+    * posY(): 获取球的Y坐标
+    * rawPos() :获取球的真实坐标
+    * vel() :获取球的速度
+    * velX() :获取球x方向的速度
+    * velY() :获取球y方向的速度
+    * velDir() :获取球速度朝向
+    * velMod() :获取球速度大小
+    * valid() :获取球是否存在
+    * toPlayerDir(role) :获取球到我方机器人的方向
+    * toEnemyDir(role) :获取球到敌方机器人的方向
+    * toPlayerDist(role) :获取球到我方机器人的距离
+    * toEnemyDist(role) :获取球到敌方机器人的距离
