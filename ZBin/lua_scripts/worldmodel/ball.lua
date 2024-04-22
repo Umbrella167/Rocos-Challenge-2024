@@ -1,41 +1,43 @@
 module(..., package.seeall)
 
+-- 获取球的坐标
 function pos()
     return vision:ball():Pos()
 end
 
+-- 获取球的X坐标
 function posX()
     return vision:ball():X()
 end
-
+-- 获取球的Y坐标
 function posY()
     return vision:ball():Y()
 end
-
+-- 获取球的真实坐标
 function rawPos()
     return vision:rawBall():Pos()
 end
-
+-- 获取球的速度
 function vel()
     return vision:ball():Vel()
 end
-
+-- 获取球x方向的速度
 function velX()
     return vision:ball():VelX()
 end
-
+-- 获取球y方向的速度
 function velY()
     return vision:ball():VelY()
 end
-
+-- 获取球速度方向
 function velDir()
     return vision:ball():Vel():dir()
 end
-
+-- 获取球速度大小
 function velMod()
     return vision:ball():Vel():mod()
 end
-
+-- 获取球是否存在
 function valid()
     return vision:ball():Valid()
 end
@@ -43,11 +45,11 @@ end
 function placementPos()
     return vision:getBallPlacementPosition()
 end
-
+-- 获取球到我方机器人的方向
 function toPlayerDir(role)
     return (player.pos(role)- pos()):dir()
 end
-
+-- 获取球到敌方机器人的方向
 function toEnemyDir(role)
     return (enemy.pos(role)-pos()):dir()
 end
