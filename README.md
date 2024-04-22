@@ -10,7 +10,7 @@
   * mod() :取两个坐标之间的模长，用法 local distance = (point1 - point2):mod()
   * dir() :取两个坐标的方向，用法 local direction = (point1 - point2):dir()
   * projection(point):获取一个(线段或者直线)相对某一坐标的投影点,返回的类型是CGeoPoint,构造方法 local prjPoint = segment:projection(point)
-  * [eg](prjpoint.png)
+![eg](prjpoint.png)
   * IsPointOnLineOnSegment(point) : 判断某坐标点是否在线段上 用法: segment:IsPointOnLineOnSegment(point) 返回 true\false
 
 
