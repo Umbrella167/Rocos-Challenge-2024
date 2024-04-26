@@ -7,6 +7,56 @@ module(..., package.seeall)
 
 --- ///  /// --- /// /// --- /// /// --- /// /// --- /// /// ---
 
+
+function TurnToPoint(role, p, speed)
+	-- 函数说明: 
+		--使用前提：拿到球之后
+		--功能：以球为中心旋转到目标点,需要在State层跳出
+	--参数说明	
+		-- role 	 使用这个函数的角色
+		-- p	     指向坐标
+		-- speed	 旋转速度 [1,10]
+	local p1 = p
+	if type(p) == 'function' then
+		p1 = p()
+	else
+		p1 = p
+	end
+	if speed == nil then
+		speed = param.rotVel
+	end
+	debugEngine:gui_debug_x(p1,6)
+	local toballDir = (p1 - player.rawPos(role)):dir() * 57.3
+	local playerDir = player.dir(role) * 57.3
+	local subPlayerBallToTargetDir = toballDir - playerDir 
+	-- local Subdir = math.abs(toballDir-playerDir)
+	debugEngine:gui_debug_msg(CGeoPoint:new_local(1000,380),toballDir .. "                     " .. playerDir,4)
+	debugEngine:gui_debug_msg(CGeoPoint:new_local(1000,220),math.abs(toballDir-playerDir) .. "                     " .. subPlayerBallToTargetDir,3)
+	if math.abs(toballDir-playerDir) > 4 then
+		if subPlayerBallToTargetDir < 0 then
+			-- 顺时针旋转
+			-- debugEngine:gui_debug_msg(CGeoPoint(1000, 1000), "顺时针")
+			local ipos = CGeoPoint(param.rotPos:x(), param.rotPos:y() * -1)  --自身相对坐标 旋转
+			local ivel = speed * -1
+			local mexe, mpos = CircleRun {pos = ipos , vel = ivel}
+			return { mexe, mpos }
+		else
+			-- 逆时针旋转
+			-- debugEngine:gui_debug_msg(CGeoPoint(1000, 1000), "逆时针")
+			local ipos = param.rotPos  --自身相对坐标 旋转
+			local ivel = speed
+
+			local mexe, mpos = CircleRun {pos = ipos , vel = ivel}
+			return { mexe, mpos }
+		end
+	else
+		local idir = (ball.pos() - player.pos(role)):dir()
+		local pp = ball.pos() + Utils.Polar2Vector(50, idir)
+		local mexe, mpos = GoCmuRush { pos = pp, dir = idir, acc = 50, flag = 0x00000100 + 0x04000000, rec = 1, vel = v }
+		return { mexe, mpos }  
+	end
+end
+
 function playerDirToPointDirSub(role, p) -- 返回 某座标点  球  playe 的角度偏差
 	if type(p) == 'function' then
 		p1 = p()

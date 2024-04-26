@@ -73,8 +73,6 @@ firstState = "Init",
         debugEngine:gui_debug_arc(firstPos[1],600,0,360,4)
         debugEngine:gui_debug_arc(firstPos[2],600,0,360,1)
         debugEngine:gui_debug_arc(firstPos[3],600,0,360,1)
-
-
         -- 如果机器人拿到球并且 与目标角度相差小于3度那么传球
         if task.playerDirToPointDirSub("Assister",player.pos("Kicker")) < 3 and player.infraredCount("Assister") > 5 then
             return "shoot"

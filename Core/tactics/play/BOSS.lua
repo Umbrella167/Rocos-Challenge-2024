@@ -45,7 +45,6 @@ local interPos = function(enemyNum)
 end
 gPlayTable.CreatePlay{
 firstState = "Init",
-
 ["Init"] = {
     switch = function()
         return "Run"
@@ -54,12 +53,10 @@ firstState = "Init",
     Assister = task.stop(),
     match = "[A]"
 },
-
 ["Run"] = {
     switch = function()
-        debugEngine:gui_debug_msg(CGeoPoint(0,0),player.infraredCount("Assister"))
     end,
-    Assister = task.stop,--task.goCmuRush(function()return interPos(function() return getTheirDribblingPlayer() end)end, toBallDir("Assister"),_,_,Utils.Polar2Vector(700,(interPos(function() return getTheirDribblingPlayer() end) - player.pos("Assister")):dir())),
+    Assister = task.goCmuRush(function()return interPos(function() return getTheirDribblingPlayer() end)end, toBallDir("Assister"),_,_,Utils.Polar2Vector(700,(interPos(function() return getTheirDribblingPlayer() end) - player.pos("Assister")):dir())),
     match = "[A]"
 },
 

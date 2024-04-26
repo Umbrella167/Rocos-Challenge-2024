@@ -15,6 +15,8 @@ module(..., package.seeall)
 -- lengthRatio	= 1.5
 -- widthRatio	= 1.5
 -- stopRatio = 1.1
+rotPos = CGeoPoint(80,80)
+rotVel = 3.8
 -----------------------
 infraredMinDist = 115
 -----------------------
