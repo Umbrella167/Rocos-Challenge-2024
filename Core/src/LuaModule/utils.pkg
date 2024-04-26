@@ -2,6 +2,7 @@ $#include <geometry.h>
 $#include "staticparams.h"
 
 namespace Utils{
+	int myInfraredCount(const CVisionModule *pVision,int num,double minDist = 100);
 	bool isValidPass(const CVisionModule *pVision, CGeoPoint start, CGeoPoint end, double buffer = 130);
 	double Normalize(double angle);
 	CVector Polar2Vector(double m,double angle);

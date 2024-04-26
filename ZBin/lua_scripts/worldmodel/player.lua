@@ -240,7 +240,15 @@ function infraredOn( role )
 end
 
 function infraredCount( role )
-	return world:InfraredOnCount(num(role))
+	local myCount = Utils.myInfraredCount(vision,num(role),param.infraredMinDist)
+	local officeCount = world:InfraredOnCount(num(role))
+	local resCount = 0
+	if officeCount < myCount then
+		resCount = myCount
+	else
+		resCount = officeCount
+	end
+	return resCount
 end
 -- role1为传球车
 function toShootOrRobot(role1)

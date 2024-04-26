@@ -45,6 +45,11 @@ end
 
 
 function Shootdot(p, Kp, error_, flag)
+	--- 功能：将球射向一个坐标点
+	--- p：目标点
+	--- Kp：力度比例
+	--- error_: 精度误差值
+	--- flag：击球的方式 [kick.flat(平射) \ kick.chip(挑球：不推荐使用、因为我们机器人不太能挑球)]
 	return function()
 		local p1
 		if type(p) == 'function' then

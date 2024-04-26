@@ -3,7 +3,7 @@
 #include "staticparams.h"
 #include <GDebugEngine.h>
 #include <iostream>
-
+int PlayerInfraredCount[PARAM::Field::MAX_PLAYER] = {0};
 namespace Utils{
     bool isValidPass(const CVisionModule *pVision, CGeoPoint start, CGeoPoint end, double buffer)
     {
@@ -20,6 +20,24 @@ namespace Utils{
             //            GDebugEngine::Instance() -> gui_debug_x(Line.projection(player_pos));
         }
         return true;
+    }
+    double angleDiff(double angle1, double angle2)
+    {
+        return std::atan2(std::sin(angle2 - angle1), std::cos(angle2 - angle1));
+    }
+    int myInfraredCount(const CVisionModule *pVision,int num,double minDist)
+    {
+
+        if(num > PARAM::Field::MAX_PLAYER) return 0;
+        CGeoPoint ballPos = pVision->ball().Valid() ? pVision->ball().Pos():pVision -> rawBall().Pos();
+        CGeoPoint playerPos = pVision->ourPlayer(num).Valid() ? pVision ->ourPlayer(num).Pos():pVision -> ourPlayer(num).RawPos();
+        double playerDir = pVision ->ourPlayer(num).Valid() ? pVision ->ourPlayer(num).Dir():pVision ->ourPlayer(num).RawDir();
+        bool AngleSub = abs(angleDiff(playerDir,(ballPos - playerPos).dir()) *  PARAM::Math::PI) < 1.28;
+        if (pVision ->ourPlayer(num).Pos().dist(ballPos) < minDist && AngleSub)
+            PlayerInfraredCount[num] += 1;
+        else
+            PlayerInfraredCount[num] = 0;
+        return PlayerInfraredCount[num];
     }
 
     double dirDiff(const CVector& v1, const CVector& v2) { return fabs(Normalize(v1.dir() - v2.dir()));}

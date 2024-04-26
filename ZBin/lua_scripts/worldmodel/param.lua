@@ -15,8 +15,9 @@ module(..., package.seeall)
 -- lengthRatio	= 1.5
 -- widthRatio	= 1.5
 -- stopRatio = 1.1
-
-
+-----------------------
+infraredMinDist = 115
+-----------------------
 maxPlayer   = 16
 pitchLength = 9000
 pitchWidth  = 6000

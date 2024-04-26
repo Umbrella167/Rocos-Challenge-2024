@@ -29,6 +29,8 @@
 class CVisionModule;
 struct PlayerPoseT;
 namespace Utils {
+extern int myInfraredCount(const CVisionModule *pVision,int num,double minDist = 100);
+extern double angleDiff(double angle1, double angle2);
 extern bool isValidPass(const CVisionModule *pVision, CGeoPoint start, CGeoPoint end, double buffer = 130);
 extern double Normalize(double angle);///<把角度规范化到(-PI,PI]
 extern CVector Polar2Vector(double m, double angle); ///<极坐标转换到直角坐标
